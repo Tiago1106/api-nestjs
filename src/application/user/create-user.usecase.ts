@@ -5,7 +5,7 @@ import { UserRepository } from '@domain/user/user.repository';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { HashService } from '@shared/crypto/hash.service';
 import { UserAlreadyExistsError } from './errors/user-already-exists.error';
-import { InvalidPasswordError } from './errors/invalid-password.error';
+import { InvalidLengthPasswordError } from './errors/invalid-password.error';
 
 export class CreateUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
@@ -18,7 +18,7 @@ export class CreateUserUseCase {
       throw new UserAlreadyExistsError();
     }
     if (!data.password || data.password.length < 6) {
-      throw new InvalidPasswordError();
+      throw new InvalidLengthPasswordError();
     }
 
     const passwordHash = await HashService.hash(data.password);

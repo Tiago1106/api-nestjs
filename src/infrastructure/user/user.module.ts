@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
+import { PrismaService } from '../database/prisma.service';
 
 import { UserController } from './user.controller';
+import { UserRepositoryPrisma } from './user.repository.prisma';
+
 import { CreateUserUseCase } from '@application/user/create-user.usecase';
 import { FetchUsersUseCase } from '@application/user/fetch-users.usecase';
-import { UserRepositoryPrisma } from './user.repository.prisma';
-import { PrismaService } from '../database/prisma.service';
 import { FetchUserUseCase } from '@application/user/fetch-user.usecase';
+import { UpdateUserUseCase } from '@application/user/update-user.usecase';
 
 @Module({
   controllers: [UserController],
@@ -32,6 +34,12 @@ import { FetchUserUseCase } from '@application/user/fetch-user.usecase';
     {
       provide: FetchUserUseCase,
       useFactory: (userRepository) => new FetchUserUseCase(userRepository),
+      inject: ['UserRepository'],
+    },
+    // UPDATE USER
+    {
+      provide: UpdateUserUseCase,
+      useFactory: (userRepository) => new UpdateUserUseCase(userRepository),
       inject: ['UserRepository'],
     },
   ],

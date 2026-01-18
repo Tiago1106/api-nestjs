@@ -58,4 +58,20 @@ export class UserRepositoryPrisma implements UserRepository {
       user.updatedAt,
     );
   }
+
+  async update(user: User): Promise<void> {
+    const updateData: Partial<{
+      name: string;
+      email: string;
+      password: string;
+    }> = {};
+    if (user.name) updateData.name = user.name;
+    if (user.email) updateData.email = user.email;
+    if (user.password) updateData.password = user.password;
+
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: updateData,
+    });
+  }
 }
