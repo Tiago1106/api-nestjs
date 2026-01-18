@@ -42,6 +42,7 @@ import { UpdateUserUseCase } from '@application/user/update-user.usecase';
       useFactory: (userRepository) => new UpdateUserUseCase(userRepository),
       inject: ['UserRepository'],
     },
+    
   ],
 })
 export class UserModule {}
