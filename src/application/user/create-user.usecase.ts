@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import { randomUUID } from 'node:crypto';
 
 import { User } from '@domain/user/user.entity';
 import { UserRepository } from '@domain/user/user.repository';

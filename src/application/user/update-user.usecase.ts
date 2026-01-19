@@ -1,4 +1,3 @@
-import { User } from '@domain/user/user.entity';
 import { UserRepository } from '@domain/user/user.repository';
 import { HashService } from '@shared/crypto/hash.service';
 import { UserAlreadyExistsError } from './errors/user-already-exists.error';
